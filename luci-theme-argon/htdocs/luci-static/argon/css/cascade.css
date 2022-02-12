@@ -1879,8 +1879,8 @@ small {
 }
 
 .main-left .sidenav-header {
-    padding: 1.5rem;
-    text-align: center
+    text-align: left;
+    padding: 1.5rem 1.5rem 1.5rem 1rem
 }
 
 .main-left .sidenav-header .brand {
@@ -1894,7 +1894,6 @@ small {
     vertical-align: text-bottom;
     white-space: nowrap;
     font-weight: bold;
-    float: left;
     margin-bottom: 30px;
 }
 

@@ -1892,7 +1892,10 @@ small {
     text-align: center;
     cursor: default;
     vertical-align: text-bottom;
-    white-space: nowrap
+    white-space: nowrap;
+    font-weight: bold;
+    float: left;
+    margin-bottom: 30px;
 }
 
 .main-left::-webkit-scrollbar {

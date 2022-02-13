@@ -2,41 +2,44 @@ bind_host: 0.0.0.0
 bind_port: 3000
 beta_bind_port: 0
 users:
-- name: root
-  password: $2y$10$dwn0hTYoECQMZETBErGlzOId2VANOVsPHsuH13TM/8KnysM5Dh/ve
+- name: yaobingz
+  password: $2a$10$YMem0JOVYJfohwClh.DqcOc6CMKGNhTDPtKRlqG9vRn1E5cJ1BjQy
 auth_attempts: 5
 block_auth_min: 15
 http_proxy: ""
-language: zh-cn
+language: ""
 debug_pprof: false
 web_session_ttl: 720
 dns:
   bind_hosts:
   - 0.0.0.0
-  port: 5553
-  statistics_interval: 30
+  port: 5353
+  statistics_interval: 1
   querylog_enabled: true
   querylog_file_enabled: true
-  querylog_interval: 6h
+  querylog_interval: 2160h
   querylog_size_memory: 1000
   anonymize_client_ip: false
   protection_enabled: true
   blocking_mode: default
   blocking_ipv4: ""
   blocking_ipv6: ""
-  blocked_response_ttl: 60
+  blocked_response_ttl: 10
   parental_block_host: family-block.dns.adguard.com
   safebrowsing_block_host: standard-block.dns.adguard.com
-  ratelimit: 0
+  ratelimit: 20
   ratelimit_whitelist: []
-  refuse_any: false
+  refuse_any: true
   upstream_dns:
-  - 223.5.5.5
+  - 182.254.116.116
+  - 180.76.76.76
+  - 140.207.198.6
+  - 114.114.114.114
   upstream_dns_file: ""
   bootstrap_dns:
-  - 119.29.29.29
-  - 223.5.5.5
-  all_servers: false
+  - 58.240.57.33
+  - 221.6.4.66
+  all_servers: true
   fastest_addr: false
   fastest_timeout: 1s
   allowed_clients: []
@@ -51,7 +54,7 @@ dns:
   cache_size: 4194304
   cache_ttl_min: 0
   cache_ttl_max: 0
-  cache_optimistic: true
+  cache_optimistic: false
   bogus_nxdomain: []
   aaaa_disabled: false
   enable_dnssec: false
@@ -70,7 +73,6 @@ dns:
   rewrites: []
   blocked_services: []
   upstream_timeout: 10s
-  local_domain_name: lan
   resolve_clients: true
   use_private_ptr_resolvers: true
   local_ptr_upstreams: []
@@ -93,16 +95,17 @@ filters:
 - enabled: true
   url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
   name: AdGuard DNS filter
-  id: 1628750870
-- enabled: true
-  url: https://anti-ad.net/easylist.txt
-  name: 'CHN: anti-AD'
-  id: 1628750871
+  id: 1
+- enabled: false
+  url: https://adaway.org/hosts.txt
+  name: AdAway Default Blocklist
+  id: 2
 whitelist_filters: []
 user_rules: []
 dhcp:
   enabled: false
   interface_name: ""
+  local_domain_name: lan
   dhcpv4:
     gateway_ip: ""
     subnet_mask: ""
@@ -128,4 +131,4 @@ os:
   group: ""
   user: ""
   rlimit_nofile: 0
-schema_version: 12
+schema_version: 13

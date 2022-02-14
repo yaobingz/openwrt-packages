@@ -422,18 +422,6 @@ local api = require "luci.model.cbi.passwall.api.api"
             }
         }
 
-        if (true) {
-            var str = "";
-            for (var add_from in node_list) {
-                var num = node_list[add_from].length + 1;
-                if (add_from == "") {
-                    add_from = "<%:Self add%>";
-                }
-                str += add_from + " " + "<%:Node num%>: <a style='color: red'>" + num + "</a>&nbsp&nbsp&nbsp";
-            }
-            document.getElementById("div_node_count").innerHTML = "<div style='margin-top:5px'>" + str + "</div>";
-        }
-
         //]]>
     </script>
 

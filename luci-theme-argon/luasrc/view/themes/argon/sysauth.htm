@@ -21,8 +21,8 @@
 	Licensed to the public under the Apache License 2.0
 -%>
 
-<%+themes/argon/out_header_login%>
-<%
+    <%+themes/argon/out_header_login%>
+        <%
 	local util		= require "luci.util"
 	local fs		= require "nixio.fs"
 	local nutil		= require "nixio.util"
@@ -83,69 +83,73 @@
 		end
 	end
 %>
-<!-- Login Page Start -->
-<div class="login-page">
-	<% if ( backgroundType == "Video" ) then %>
-	<!-- Video Player Start -->
-	<div class="video">
-		<video autoplay loop muted id="video">
+            <!-- Login Page Start -->
+            <div class="login-page">
+                <% if ( backgroundType == "Video" ) then %>
+                    <!-- Video Player Start -->
+                    <div class="video">
+                        <video autoplay loop muted id="video">
 			<source src="<%=bgUrl%>" type="video/mp4">
 		</video>
-	</div>
-	<div class="volume-control mute"></div>
-	<script>
-		$(".volume-control").click(function(){
-			if($(this).hasClass("mute")){
-				$(this).removeClass("mute")
-				$("#video").prop('muted', false);
-			}else{
-				$(this).addClass("mute")
-				$("#video").prop('muted', true);
-			}
-		})
-	</script>
-	<!-- Video Player End -->
-	<% else %>
-	<!-- Image Background Start -->
-	<div class="main-bg" id="main-bg" style="background-image:url(<%=bgUrl%>)"></div>
-	<!-- Image Background End -->
-	<% end %>
-	<!-- Login Container Start -->
-	<div class="login-container">
-		<div class="login-form">
-			<!-- Logo Start -->
-			<a class="brand" href="/"><img src="<%=media%>/img/argon.svg" class="icon">
+                    </div>
+                    <div class="volume-control mute"></div>
+                    <script>
+                        $(".volume-control").click(function() {
+                            if ($(this).hasClass("mute")) {
+                                $(this).removeClass("mute")
+                                $("#video").prop('muted', false);
+                            } else {
+                                $(this).addClass("mute")
+                                $("#video").prop('muted', true);
+                            }
+                        })
+                    </script>
+                    <!-- Video Player End -->
+                    <% else %>
+                        <!-- Image Background Start -->
+                        <div class="main-bg" id="main-bg" style="background-image:url(<%=bgUrl%>)"></div>
+                        <!-- Image Background End -->
+                        <% end %>
+                            <!-- Login Container Start -->
+                            <div class="login-container">
+                                <div class="login-form">
+                                    <!-- Logo Start -->
+                                    <a class="brand" href="/"><img src="<%=media%>/img/openwrt_icon_dark-512.png" class="icon">
 				<span class="brand-text"><%=striptags( (boardinfo.hostname or "?") .. ( (node and node.title) and ' - ' .. translate(node.title) or '')) %></span>
 			</a>
-			<!-- Logo End -->
-			<!-- Login Form Start -->
-			<form class="form-login" method="post" action="<%=pcdata(luci.http.getenv("REQUEST_URI"))%>">
+                                    <!-- Logo End -->
+                                    <!-- Login Form Start -->
+                                    <form class="form-login" method="post" action="<%=pcdata(luci.http.getenv(" REQUEST_URI "))%>">
 
-				<%- if fuser then %>
-				<div class="errorbox"><%:Invalid username and/or password! Please try again.%></div>
-				<% end -%>
+                                        <%- if fuser then %>
+                                            <div class="errorbox">
+                                                <%:Invalid username and/or password! Please try again.%>
+                                            </div>
+                                            <% end -%>
 
-				<div class="input-container">
-					<div class="input-group user-icon">
-						<input class="cbi-input-user" id="cbi-input-user" type="text" name="luci_username" value="<%=duser%>" />
-						<label class="border" for="cbi-input-user"></label>
-					</div>
-					<div class="input-group pass-icon">
-						<input class="cbi-input-password" id="cbi-input-password" type="password" name="luci_password" />
-						<label class="border" for="cbi-input-password"></label>
-					</div>
-				</div>
-				<div>
-					<input type="submit" value="<%:Login%>" class="cbi-button cbi-button-apply" />
-				</div>
-			</form>
-			<!-- Login Form End -->
-			<script type="text/javascript">//<![CDATA[
-				var input = document.getElementsByName('luci_password')[0];
-				if (input)
-					input.focus();
-			//]]></script>
-			<%
+                                                <div class="input-container">
+                                                    <div class="input-group user-icon">
+                                                        <input class="cbi-input-user" id="cbi-input-user" type="text" name="luci_username" value="<%=duser%>" />
+                                                        <label class="border" for="cbi-input-user"></label>
+                                                    </div>
+                                                    <div class="input-group pass-icon">
+                                                        <input class="cbi-input-password" id="cbi-input-password" type="password" name="luci_password" />
+                                                        <label class="border" for="cbi-input-password"></label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <input type="submit" value="<%:Login%>" class="cbi-button cbi-button-apply" style="background-color: #133356!important;" />
+                                                </div>
+                                    </form>
+                                    <!-- Login Form End -->
+                                    <script type="text/javascript">
+                                        //<![CDATA[
+                                        var input = document.getElementsByName('luci_password')[0];
+                                        if (input)
+                                            input.focus();
+                                        //]]>
+                                    </script>
+                                    <%
 			local uci  = require "luci.model.uci".cursor()
 			local fs  = require "nixio.fs"
 			local https_key = uci:get("uhttpd", "main", "key")
@@ -157,16 +161,20 @@
 			if https_port and fs.access(https_key) then
 				https_port = https_port:match("(%d+)$")
 			%>
-			<script type="text/javascript">//<![CDATA[
-				if (document.location.protocol != 'https:') {
-					var url = 'https://' + window.location.hostname + ':' + '<%=https_port%>' + window.location.pathname;
-					var img = new Image;
-					img.onload = function () { window.location = url };
-					img.src = 'https://' + window.location.hostname + ':' + '<%=https_port%>' + '<%=resource%>/cbi/up.gif?' + Math.random();;
-					setTimeout(function () {
-						img.src = ''
-					}, 5000);
-				}
-			//]]></script>
-			<% end %>
-<%+themes/argon/out_footer_login%>
+                                        <script type="text/javascript">
+                                            //<![CDATA[
+                                            if (document.location.protocol != 'https:') {
+                                                var url = 'https://' + window.location.hostname + ':' + '<%=https_port%>' + window.location.pathname;
+                                                var img = new Image;
+                                                img.onload = function() {
+                                                    window.location = url
+                                                };
+                                                img.src = 'https://' + window.location.hostname + ':' + '<%=https_port%>' + '<%=resource%>/cbi/up.gif?' + Math.random();;
+                                                setTimeout(function() {
+                                                    img.src = ''
+                                                }, 5000);
+                                            }
+                                            //]]>
+                                        </script>
+                                        <% end %>
+                                            <%+themes/argon/out_footer_login%>

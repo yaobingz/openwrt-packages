@@ -4212,7 +4212,8 @@ input[name="nslookup"] {
 }
 
 [data-page="admin-system-reboot"] .cbi-button {
-    background: #fb6340 !important
+    background: #fb6340 !important;
+    border: #fb6340;
 }
 
 [data-page="admin-system-reboot"] p>span {
